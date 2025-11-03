@@ -1,0 +1,33 @@
+# Query to list all items, available to the public
+query ListItems @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  items {
+    id
+    name
+    description
+  }
+}
+
+# Query to get a specific item by ID, only accessible to authenticated users.
+query GetItem($id: ID!) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  item(key: { id: $id }) {
+    id
+    name
+    description
+    ownerUid
+  }
+}
+
+# Mutation to create a new item, only accessible to authenticated users.
+# The ownerUid is automatically set to the user's UID.
+mutation CreateItem($name: String!, $description: String!) @auth(level: USER) {
+  item: item_insert(data: {
+    name: $name,
+    description: $description,
+    ownerUid_expr: "auth.uid"
+  })
+}
+
+# Mutation to delete an item, only accessible to the item owner.
+mutation DeleteItem($id: ID!) @auth(expr: "query.item(key: {id: $id}).ownerUid == auth.uid") {
+  item: item_delete(key: { id: $id })
+}

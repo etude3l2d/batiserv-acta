@@ -1,0 +1,31 @@
+type Customer @table {
+  name: String!
+  createdAt: Timestamp!
+  email: String
+  phone: String
+  address: String
+  notes: String
+}
+
+type Worksite @table {
+  name: String!
+  address: String!
+  createdAt: Timestamp!
+  customer: Customer
+  contactPerson: String
+  contactPhone: String
+  notes: String
+}
+
+type Order @table {
+  orderNumber: String!
+  description: String!
+  status: String!
+  createdAt: Timestamp!
+  customer: Customer
+  worksite: Worksite
+  scheduledDate: Timestamp
+  completedDate: Timestamp
+  totalPrice: Float
+  notes: String
+}

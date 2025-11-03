@@ -1,0 +1,60 @@
+mutation SeedData @auth(level: PUBLIC, insecureReason: "This mutation is for seeding data and does not require authentication") {
+  customer_insertMany(data: [
+    {
+      name: "Acme Corp",
+      email: "info@acmecorp.com",
+      phone: "555-123-4567",
+      address: "123 Main St",
+      notes: "Long-time customer"
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      name: "Beta Co",
+      email: "contact@betaco.com",
+      phone: "555-987-6543",
+      address: "456 Elm St",
+      notes: "New customer"
+      createdAt: "2024-02-15T00:00:00Z"
+    }
+  ])
+  worksite_insertMany(data: [
+    {
+      name: "Acme Corp HQ",
+      address: "123 Main St",
+      customerId: "550e8400-e29b-41d4-a716-446655440000",
+      contactPerson: "John Smith",
+      contactPhone: "555-111-2222",
+      createdAt: "2024-01-05T00:00:00Z",
+      notes: "Primary worksite"
+    },
+    {
+      name: "Beta Co Warehouse",
+      address: "789 Oak St",
+      customerId: "550e8400-e29b-41d4-a716-446655440001",
+      contactPerson: "Jane Doe",
+      contactPhone: "555-333-4444",
+      createdAt: "2024-02-20T00:00:00Z",
+      notes: "Main warehouse"
+    }
+  ])
+  order_insertMany(data: [
+    {
+      orderNumber: "ORD-2024-001",
+      description: "Initial order",
+      customerId: "550e8400-e29b-41d4-a716-446655440000",
+      worksiteId: "660f9511-f3ac-52e5-b827-557766551111",
+      createdAt: "2024-01-10T00:00:00Z",
+      status: "Completed",
+      totalPrice: 1000.00
+    },
+    {
+      orderNumber: "ORD-2024-002",
+      description: "Follow-up order",
+      customerId: "550e8400-e29b-41d4-a716-446655440001",
+      worksiteId: "660f9511-f3ac-52e5-b827-557766551112",
+      createdAt: "2024-02-25T00:00:00Z",
+      status: "Pending",
+      totalPrice: 500.00
+    }
+  ])
+}
