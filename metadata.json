@@ -1,0 +1,5 @@
+{
+  "name": "batiserv-acta",
+  "description": "Une application pour suivre les clients et leurs chantiers, y compris les informations générales et les numéros de commande.",
+  "requestFramePermissions": []
+}
